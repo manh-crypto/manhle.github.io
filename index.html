@@ -3,10 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website của Mạnh</title>
+    <title>Shop Demo của Mạnh</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        .product { border: 1px solid #ccc; padding: 10px; margin: 10px; display: inline-block; width: 200px; vertical-align: top; }
+        button { padding: 5px 10px; cursor: pointer; }
+        #cart { list-style-type: none; padding: 0; }
+        #cart li { margin-bottom: 5px; }
+    </style>
 </head>
 <body>
-    <h1>Chào mừng bạn đến với website của mình!</h1>
-    <p>Đây là site demo miễn phí có HTTPS.</p>
+    <h1>Chào mừng đến Shop Demo của Mạnh!</h1>
+    <p>Đây là website e-commerce demo chạy HTTPS (self-signed).</p>
+
+    <h2>Sản phẩm</h2>
+    <div id="products">
+        <div class="product">
+            <h3>Áo thun Mạnh</h3>
+            <p>Giá: 200.000 VND</p>
+            <button onclick="addToCart('Áo thun Mạnh', 200000)">Thêm vào giỏ</button>
+        </div>
+        <div class="product">
+            <h3>Ly sứ Mạnh</h3>
+            <p>Giá: 50.000 VND</p>
+            <button onclick="addToCart('Ly sứ Mạnh', 50000)">Thêm vào giỏ</button>
+        </div>
+        <div class="product">
+            <h3>Balo Mạnh</h3>
+            <p>Giá: 350.000 VND</p>
+            <button onclick="addToCart('Balo Mạnh', 350000)">Thêm vào giỏ</button>
+        </div>
+    </div>
+
+    <h2>Giỏ hàng</h2>
+    <ul id="cart"></ul>
+    <p id="total">Tổng: 0 VND</p>
+
+    <script>
+        let cartItems = [];
+        let total = 0;
+
+        function addToCart(name, price){
+            cartItems.push({name, price});
+            total += price;
+            updateCart();
+        }
+
+        function updateCart(){
+            const cartEl = document.getElementById('cart');
+            cartEl.innerHTML = '';
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - ${item.price.toLocaleString()} VND`;
+                cartEl.appendChild(li);
+            });
+            document.getElementById('total').textContent = `Tổng: ${total.toLocaleString()} VND`;
+        }
+    </script>
 </body>
 </html>
